@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry location="E:\packages\mysql-connector-java-5.1.39-bin.jar"/>
+    <context id="api">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/portal?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true"
+                        userId="root" password="root"/>
+        <javaModelGenerator targetPackage="com.tbjj.portal.repository.api.entity" targetProject="MAVEN"/>
+        <sqlMapGenerator targetPackage="com.tbjj.portal.repository.api" targetProject="MAVEN"/>
+        <javaClientGenerator targetPackage="com.tbjj.portal.repository.api" targetProject="MAVEN"
+                             type="XMLMAPPER"/>
+
+
+
+
+<!--
+        <table schema="" mapperName="CustomerRepository" tableName="t_customer"
+               domainObjectName="Customer">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+
+        <table schema="" mapperName="EventRepository" tableName="portal_event"
+               domainObjectName="Event">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="EventStreamRepository" tableName="portal_event_stream"
+               domainObjectName="EventStream">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="EmployeeRepository" tableName="portal_employee"
+               domainObjectName="Employee">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="NaviRepository" tableName="portal_navi"
+               domainObjectName="Navi">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="PanelRepository" tableName="portal_panel"
+               domainObjectName="Panel">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="DepartmentRepository" tableName="portal_department"
+               domainObjectName="Department">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="NaviEmpRepository" tableName="portal_navi_emp"
+               domainObjectName="NaviEmp">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="PanelEmpRepository" tableName="portal_panel_emp"
+               domainObjectName="PanelEmp">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="EventMessageRepository" tableName="portal_event_message"
+               domainObjectName="EventMessage">
+            <generatedKey column="mess_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="ContractRepository" tableName="portal_contract"
+               domainObjectName="Contract">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table schema="" mapperName="ContractTypeRepository" tableName="portal_contract_type"
+               domainObjectName="ContractType">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+    </context>
+
+
+
+</generatorConfiguration>
+

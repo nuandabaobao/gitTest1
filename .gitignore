@@ -1,0 +1,14 @@
+.idea
+LOG_PATH_IS_UNDEFINED
+/portal-api/target/
+/portal-core/target/
+/portal-common/target/
+/portal-config/target/
+/portal-repository/target/
+
+/portal-webService/target/classes
+/portal-admin/target/classes
+/portal-admin/target
+/portal-portal/target
+/portal-webService
+/portal-parent/target/classes

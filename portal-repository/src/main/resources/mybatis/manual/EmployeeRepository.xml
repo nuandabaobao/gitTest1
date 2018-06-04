@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.EmployeeRepository">
+
+  <select id="getEEList" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.EmployeeSearch">
+      SELECT
+        e.id AS "id",
+        d.id AS "departmentId",
+        d.`name` AS "departmentName",
+        e.user_name AS "userName",
+        e.`name` AS "name",
+        e.`password` AS "password",
+        e.mobile AS "mobile"
+      FROM
+          portal_employee e
+      LEFT JOIN portal_department d ON e.department_id = d.id
+      WHERE e.is_delete=0 AND e.is_admin=0
+      <if test="userName!=null and userName!=''">
+        AND e.user_name like CONCAT('%',#{userName},'%')
+      </if>
+      <if test="name!=null and name!=''">
+        AND e. NAME like CONCAT('%',#{name},'%')
+      </if>
+      <if test="mobile!=null and mobile!=''">
+        AND e.mobile like CONCAT('%',#{mobile},'%')
+      </if>
+      <if test="departmentId!=null and departmentId!=''">
+        AND e.department_id = #{departmentId}
+      </if>
+  </select>
+
+</mapper>

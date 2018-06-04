@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>portal-parent</artifactId>
+        <groupId>com.tbjj.portal</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../portal-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>portal-api</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <java.version>1.7</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
+        <start-class>com.tbjj.portal.Application</start-class>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.tbjj.portal</groupId>
+            <artifactId>portal-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tbjj.portal</groupId>
+            <artifactId>portal-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tbjj.portal</groupId>
+            <artifactId>portal-config</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <!--
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </dependency>
+        -->
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>1.6.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>capital.scalable</groupId>
+            <artifactId>spring-auto-restdocs-core</artifactId>
+            <version>1.0.5</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
+            <version>1.1.2.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path-assert</artifactId>
+            <version>2.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>2.2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.session</groupId>-->
+        <!--<artifactId>spring-session</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.session</groupId>-->
+        <!--<artifactId>spring-session-data-redis</artifactId>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>2.5.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.8.5</version>
+        </dependency>
+
+        <!--websocket jar 包 开始-->
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <scope>compile</scope>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-client</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-container-grizzly-client</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <!--websocket jar 包 结束-->
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <systemPropertyVariables>
+                        <org.springframework.restdocs.outputDir>
+                            ${snippetsDirectory}
+                        </org.springframework.restdocs.outputDir>
+                        <org.springframework.restdocs.javadocJsonDir>
+                            ${project.build.directory}/generated-javadoc-json
+                        </org.springframework.restdocs.javadocJsonDir>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>generate-docs</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <backend>html</backend>
+                    <doctype>book</doctype>
+                    <sourceHighlighter>highlightjs</sourceHighlighter>
+                    <attributes>
+                        <snippets>${snippetsDirectory}</snippets>
+                    </attributes>
+                </configuration>
+            </plugin>-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-index-public</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/public</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/generated-docs</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-index-generated-docs</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/src/main/resources/static/generated-docs</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/generated-docs</directory>
+                                    <includes>
+                                        <include>index.html</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <extensions>true</extensions>
+
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>javadoc-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doclet>capital.scalable.restdocs.jsondoclet.ExtractDocumentationAsJsonDoclet</doclet>
+                    <docletArtifact>
+                        <groupId>capital.scalable</groupId>
+                        <artifactId>spring-auto-restdocs-json-doclet</artifactId>
+                        <version>1.0.5</version>
+                    </docletArtifact>
+                    <destDir>generated-javadoc-json</destDir>
+                    <reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
+                    <useStandardDocletOptions>false</useStandardDocletOptions>
+                    <show>package</show>
+                    <aggregate>true</aggregate>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!--<resources>
+            <resource>
+                <directory>../jifen-core/lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>BOOT-INF/classes/</targetPath>
+            </resource>
+        </resources>-->
+    </build>
+
+</project>

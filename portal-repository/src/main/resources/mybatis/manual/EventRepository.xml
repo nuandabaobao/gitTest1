@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.EventRepository">
+  <select id="getEventByEventCode" resultType="com.tbjj.portal.repository.api.entity.Event">
+      SELECT id,
+          event_code AS eventCode,
+          title,
+          user_name AS userName,
+          apply_time AS applyTime,
+          operation_time AS operationName,
+          system_code AS systemCode,
+          apply_url AS url,
+          event_status AS eventStatus,
+          is_pass AS isPass,
+          is_delete AS isDelete,
+          update_times AS updateTimes
+      FROM portal_event WHERE event_code=#{eventCode} AND is_delete=0
+  </select>
+
+    <!--分页条件查询经办事件-->
+    <select id="applyEventList" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.EventSearch">
+      SELECT
+            e.id AS eventId,
+            s.id AS eventStreamId,
+            e.title AS eventTitle,
+            e.read_status AS readStatus,
+            d.id AS deptId,
+            d.`name` AS deptName,
+            r.id AS receiverId,
+            r.user_name AS receiverUserName,
+            r.`name` AS receiverName,
+            e.apply_time AS applyTime,
+            e.operation_time AS operationTime,
+            e.apply_url AS url
+        FROM
+            portal_event e
+        LEFT JOIN portal_event_stream s ON e.operation_time = s.operation_time AND e.id=s.event_id
+        AND s.deal_code = 0
+        LEFT JOIN portal_employee r ON s.user_name = r.user_name
+        LEFT JOIN portal_department d ON r.department_id = d.id
+        WHERE
+            e.user_name = #{userName}
+        <if test="word!=null and word!=''">
+            AND (
+            e.title LIKE CONCAT('%',#{word},'%')
+            OR r.`name` LIKE CONCAT('%',#{word},'%')
+            )
+        </if>
+        <if test="readStatus!=null">
+            AND e.read_status = #{readStatus}
+        </if>
+        <if test="deptId!=null">
+            AND d.id = #{deptId}
+        </if>
+        <if test="applyTimeStart!=null">
+            AND DATE_FORMAT(e.apply_time, '%Y-%m-%d') >= DATE_FORMAT(
+            #{applyTimeStart},'%Y-%m-%d')
+        </if>
+        <if test="applyTimeEnd!=null">
+            AND DATE_FORMAT(#{applyTimeEnd},'%Y-%m-%d')
+            >= DATE_FORMAT(e.apply_time, '%Y-%m-%d')
+        </if>
+        <if test="opeTimeStart!=null">
+            AND DATE_FORMAT(
+            e.operation_time,'%Y-%m-%d'
+            ) >= DATE_FORMAT(
+            #{opeTimeStart},
+            '%Y-%m-%d'
+            )
+        </if>
+        <if test="opeTimeEnd!=null">
+            AND DATE_FORMAT(
+            #{opeTimeEnd},
+            '%Y-%m-%d'
+            ) >= DATE_FORMAT(
+            e.operation_time,
+            '%Y-%m-%d'
+            )
+        </if>
+
+    </select>
+
+    <!--分页条件查询待办事件-->
+    <select id="backlogEventList" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.EventSearch">
+        SELECT
+            e.id AS "eventId",
+            s.id AS "eventStreamId",
+            e.title AS "eventTitle",
+            s.read_code AS "readStatus",
+            d.id AS "deptId",
+            d.`name` AS "deptName",
+            o.id AS "operatorId",
+            o.user_name AS "operatorUserName",
+            o.`name` AS "operatorName",
+            r.id AS "receiverId",
+            r.user_name AS "receiverUserName",
+            r.`name` AS "receiverName",
+            e.apply_time AS "applyTime",
+            s.operation_time AS "operationTime",
+            s.approve_url AS "url"
+        FROM
+            portal_event_stream s
+        LEFT JOIN portal_event e ON s.event_id = e.id
+        LEFT JOIN portal_employee o ON o.user_name = e.user_name
+        LEFT JOIN portal_department d ON d.id = o.department_id
+        LEFT JOIN portal_employee r ON r.user_name = s.user_name
+        WHERE
+            s.deal_code = 0
+        AND s.user_name = #{userName}
+        AND e.event_status=1
+        <if test="word!=null and word!=''">
+            AND (
+                e.title LIKE CONCAT('%',#{word},'%')
+                OR o.`name` LIKE CONCAT('%',#{word},'%')
+            )
+        </if>
+        <if test="deptId!=null">
+            AND d.id = #{deptId}
+        </if>
+        <if test="readStatus!=null">
+            AND s.read_code = #{readStatus}
+        </if>
+        <if test="applyTimeStart!=null">
+            AND DATE_FORMAT(e.apply_time, '%Y-%m-%d') >= DATE_FORMAT(
+                #{applyTimeStart},
+                '%Y-%m-%d'
+            )
+        </if>
+        <if test="applyTimeEnd!=null">
+            AND DATE_FORMAT(
+                #{applyTimeEnd},
+                '%Y-%m-%d'
+                ) >= DATE_FORMAT(e.apply_time, '%Y-%m-%d')
+        </if>
+        <if test="opeTimeStart!=null">
+            AND DATE_FORMAT(
+            s.operation_time,
+            '%Y-%m-%d'
+            ) >= DATE_FORMAT(
+            #{opeTimeStart},
+            '%Y-%m-%d'
+            )
+        </if>
+        <if test="opeTimeEnd!=null">
+            AND DATE_FORMAT(
+                #{opeTimeEnd},
+                '%Y-%m-%d'
+                ) >= DATE_FORMAT(
+                s.operation_time,
+                '%Y-%m-%d'
+                )
+        </if>
+    </select>
+
+    <!--分页条件查询已办事件-->
+    <select id="alreadyDoEvent" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.EventSearch">
+        SELECT
+            e.id AS eventId,
+            s.id AS eventStreamId,
+            e.title AS eventTitle,
+            s.read_code AS readStatus,
+            d.id AS deptId,
+            d.`name` AS deptName,
+            o.id AS operatorId,
+            o.user_name AS operatorUserName,
+            o.`name` AS operatorName,
+            r.id AS receiverId,
+            r.user_name AS receiverUserName,
+            r.`name` AS receiverName,
+            e.apply_time AS applyTime,
+            s.operation_time AS operationTime,
+            e.apply_url AS url
+        FROM
+            portal_event_stream s
+        LEFT JOIN portal_event e ON s.event_id = e.id
+        LEFT JOIN portal_event_stream b ON e.operation_time = b.operation_time
+        AND b.deal_code = 0
+        LEFT JOIN portal_employee o ON e.user_name = o.user_name
+        LEFT JOIN portal_department d ON o.department_id = d.id
+        LEFT JOIN portal_employee r ON r.user_name = b.user_name
+        WHERE
+            s.user_name = #{userName}
+        AND s.deal_code = 1
+        AND e.event_status = 1
+        <if test="word!=null and word!=''">
+            AND (
+                e.title LIKE CONCAT('%',#{word},'%')
+                OR o.`name` LIKE CONCAT('%',#{word},'%')
+            )
+        </if>
+        <if test="deptId!=null">
+            AND d.id = #{deptId}
+        </if>
+        <if test="readStatus!=null">
+            AND s.read_code = #{readStatus}
+        </if>
+        <if test="applyTimeStart!=null">
+            AND DATE_FORMAT(e.apply_time, '%Y-%m-%d') >= DATE_FORMAT(
+                #{applyTimeStart},
+                '%Y-%m-%d'
+            )
+        </if>
+        <if test="applyTimeEnd!=null">
+            AND DATE_FORMAT(
+            #{applyTimeEnd},
+            '%Y-%m-%d'
+            ) >= DATE_FORMAT(e.apply_time, '%Y-%m-%d')
+        </if>
+        <if test="opeTimeStart!=null">
+            AND DATE_FORMAT(
+                s.operation_time,
+                '%Y-%m-%d'
+            ) >= DATE_FORMAT(
+                #{opeTimeStart},
+                '%Y-%m-%d'
+            )
+        </if>
+        <if test="opeTimeEnd!=null">
+            AND DATE_FORMAT(
+            #{opeTimeEnd},
+            '%Y-%m-%d'
+            ) >= DATE_FORMAT(
+            s.operation_time,
+            '%Y-%m-%d'
+            )
+        </if>
+    </select>
+
+    <!--分页条件查询完成事件-->
+    <select id="finishEvent" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.EventSearch">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        DISTINCT(e.id) AS eventId,
+        e.title AS eventTitle,
+        e.read_status AS readStatus,
+        d.id AS deptId,
+        d.`name` AS deptName,
+        o.id AS operatorId,
+        o.user_name AS operatorUserName,
+        o.`name` AS operatorName,
+        e.apply_time AS applyTime,
+        e.operation_time AS operationTime,
+        e.is_pass AS eventResult,
+        e.apply_url AS url
+        FROM
+        portal_event_stream s,
+        portal_event e
+        LEFT JOIN portal_employee o ON e.user_name = o.user_name
+        LEFT JOIN portal_department d ON o.department_id = d.id
+        WHERE
+        s.user_name = #{userName}
+        AND s.event_id = e.id
+        AND s.user_name NOT IN (e.user_name)
+        AND s.deal_code = 1
+        AND e.event_status = 2
+        UNION ALL
+        SELECT
+        DISTINCT(e.id) AS eventId,
+        e.title AS eventTitle,
+        e.read_status AS readStatus,
+        d.id AS deptId,
+        d.`name` AS deptName,
+        o.id AS operatorId,
+        o.user_name AS operatorUserName,
+        o.`name` AS operatorName,
+        e.apply_time AS applyTime,
+        e.operation_time AS operationTime,
+        e.is_pass AS eventResult,
+        e.apply_url AS url
+        FROM
+        portal_event e
+        LEFT JOIN portal_employee o ON e.user_name = o.user_name
+        LEFT JOIN portal_department d ON o.department_id = d.id
+        WHERE
+        e.user_name = #{userName}
+        AND e.event_status = 2
+        ) k
+        <where>
+            <if test="word!=null and word!=''">
+                AND (
+                    k.eventTitle LIKE CONCAT('%',#{word},'%')
+                    OR k.operatorName LIKE CONCAT('%',#{word},'%')
+                )
+            </if>
+            <if test="deptId!=null">
+                AND k.deptId = #{deptId}
+            </if>
+            <if test="readStatus!=null">
+                AND k.readStatus = #{readStatus}
+            </if>
+            <if test="applyTimeStart!=null">
+                AND DATE_FORMAT(k.applyTime, '%Y-%m-%d') >= DATE_FORMAT(
+                    #{applyTimeStart},
+                    '%Y-%m-%d'
+                )
+            </if>
+            <if test="applyTimeEnd!=null">
+                AND DATE_FORMAT(
+                #{applyTimeEnd},
+                '%Y-%m-%d'
+                ) >= DATE_FORMAT(k.applyTime, '%Y-%m-%d')
+            </if>
+            <if test="opeTimeStart!=null">
+                AND DATE_FORMAT(
+                    k.operationTime,
+                    '%Y-%m-%d'
+                ) >= DATE_FORMAT(
+                    #{opeTimeStart},
+                    '%Y-%m-%d'
+                )
+            </if>
+            <if test="opeTimeEnd!=null">
+                AND DATE_FORMAT(
+                #{opeTimeEnd},
+                '%Y-%m-%d'
+                ) >= DATE_FORMAT(
+                k.operationTime,
+                '%Y-%m-%d'
+                )
+            </if>
+        </where>
+    </select>
+</mapper>

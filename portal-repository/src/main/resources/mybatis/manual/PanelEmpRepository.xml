@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.PanelEmpRepository">
+
+  <!--根据用户id查询已关联的面板-->
+  <select id="getPanelEmpList" parameterType="Integer" resultType="com.tbjj.portal.repository.api.entity.EmployeeOnPanel">
+    SELECT
+        z.id AS panelEmpId,
+        z.employee_id AS empId,
+        z.panel_id AS panelId,
+        z.location AS location,
+        p.`name` AS panelName,
+        p.yaxis AS panelYaxis,
+        p.inco_url AS panelIncoUrl,
+        p.panel_type AS panelType
+    FROM
+        portal_panel_emp z
+    LEFT JOIN portal_panel p ON z.panel_id = p.id
+    WHERE
+        z.employee_id = #{empId}
+    AND z.is_delete = 0
+  </select>
+
+  <!--根据用户名查询提交率-->
+  <select id="findSubmit" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.PanelData">
+      SELECT
+        DATE_FORMAT(e.apply_time,#{resultFormat}) AS "xaxis",
+        count(*) AS "count"
+      FROM
+        portal_event e
+      WHERE
+        e.user_name=#{userName} AND
+        DATE_FORMAT(e.apply_time, #{format}) BETWEEN DATE_FORMAT(#{startTime}, #{format})
+      AND DATE_FORMAT(#{endTime}, #{format})
+      GROUP BY
+        DATE_FORMAT(e.apply_time, #{format});
+  </select>
+
+  <!--根据用户名查询成功率-->
+  <select id="findSuccess" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.PanelData">
+      SELECT
+        DATE_FORMAT(e.apply_time,#{resultFormat}) AS "xaxis",
+        count(*) AS "count"
+      FROM
+        portal_event e
+      WHERE
+        e.user_name=#{userName}
+      AND e.event_status = 2
+      AND is_pass = 1
+      AND DATE_FORMAT(e.apply_time, #{format}) BETWEEN DATE_FORMAT(#{startTime}, #{format})
+      AND DATE_FORMAT(#{endTime}, #{format})
+      GROUP BY
+        DATE_FORMAT(e.apply_time, #{format});
+  </select>
+
+  <!--根据用户名查询修改率-->
+  <select id="findModify" parameterType="map" resultType="com.tbjj.portal.repository.api.entity.PanelData">
+      SELECT
+        DATE_FORMAT(e.apply_time,#{resultFormat}) AS "xaxis",
+        sum(e.update_times) AS "count"
+      FROM
+        portal_event e
+      WHERE
+        e.user_name=#{userName}
+      AND e.event_status = 2
+      AND is_pass = 1
+      AND DATE_FORMAT(e.apply_time, #{format}) BETWEEN DATE_FORMAT(#{startTime}, #{format})
+      AND DATE_FORMAT(#{endTime}, #{format})
+      GROUP BY
+        DATE_FORMAT(e.apply_time, #{format});
+  </select>
+</mapper>

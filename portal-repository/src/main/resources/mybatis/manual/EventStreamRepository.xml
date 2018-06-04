@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.EventStreamRepository">
+   <update id="updateStreamByBackLogId" parameterType="com.tbjj.portal.repository.api.entity.EventStream">
+        UPDATE portal_event_stream
+          SET operation_time = #{operationTime},
+              read_code=#{readCode},deal_code=#{dealCode}
+        WHERE backlog_id = #{backlogId}
+    </update>
+
+    <!--根据事件id查询最新的一条事件流-->
+    <select id="newestEventStream" parameterType="Integer" resultType="com.tbjj.portal.repository.api.entity.EventStream">
+        SELECT
+        id AS id,
+        event_id AS eventId,
+        system_code AS systemCode,
+        operation_time AS operationTime,
+        user_name AS userName,
+        approve_result AS approveResult,
+        response_desc AS responseDesc,
+        approve_url AS approveUrl,
+        read_code AS readCode,
+        deal_code AS dealCode,
+        backlog_id AS backlogId
+        FROM
+        portal_event_stream s
+        WHERE
+        s.event_id =#{eventId}
+        AND s.deal_code=0
+        ORDER BY
+        s.operation_time DESC
+        LIMIT 1;
+    </select>
+</mapper>

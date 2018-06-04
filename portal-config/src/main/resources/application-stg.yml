@@ -1,0 +1,53 @@
+spring:
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://rm-wz95ab8k920y5j342.mysql.rds.aliyuncs.com:3306/taoshijian_stg?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+      username: taoshijian
+      password: Taoshijian66
+      maximumPoolSize: 200
+      maxIdle: 30
+      minIdle: 5
+      maxWait: 5000
+      maxActive: 200
+      initalSize: 5
+
+      filters: stat
+      # connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  session:
+    store-type: none
+  redis:
+    host: 112.124.100.131
+    password: taoshijianapp
+    port: 26379
+    jedis:
+      pool:
+        maxActive: 100
+        maxIdle: 8
+
+http:
+    multipart:
+      maxFileSize: 104857600
+      maxRequestSize: 104857600
+
+mybatis:
+  mapperLocations: classpath:mybatis/**/*Repository.xml
+  typeAliasesPackage: com.tbjj.portal.repository.**.entity
+  configLocation: classpath:mybatis-config.xml
+
+logging:
+  level:
+    org:
+      mybatis:
+        SQL: info
+      springframework: info
+
+internaltrade:
+  request:
+    url: http://172.18.158.162:9180/payment/entry/internaltrade.do
+
+#是否处于支付调试状态;默认为1
+#1-为处于支付调试中,调用支付平台收费和付费都是只收取0.01元但是实际到账是用户申请的金额
+#不为1则处于非支付调试中正常扣款
+payment:
+  debug: "1"

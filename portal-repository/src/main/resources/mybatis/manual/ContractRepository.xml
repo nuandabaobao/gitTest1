@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.ContractRepository">
+
+  <select id="getContractByEventId" parameterType="java.lang.Integer" resultType="com.tbjj.portal.repository.api.entity.Contract">
+    SELECT
+        id AS id,
+        event_id AS eventId,
+        company_name AS companyName,
+        contract_type AS contractType,
+        apply_user_name AS applyUserName,
+        apply_dept AS applyDept,
+        clauseItem_name AS clauseItemName,
+        item_name AS itemName,
+        contract_code AS contractCode,
+        contract_name AS contractName,
+        jia_company AS jiaCompany,
+        yi_company AS yiCompany,
+        bing_company AS bingCompany,
+        contract_money AS contractMoney,
+        pay_money AS payMoney,
+        total_pay_money AS totalPayMoney,
+        apply_money AS applyMoney,
+        pay_cause AS payCause,
+        pay_way AS payWay,
+        real_pay_money AS realPayMoney,
+        pay_money_date AS payMoneyDate,
+        apply_date AS applyDate,
+        unit_id AS unitId
+    FROM
+        `portal_contract`
+    WHERE
+        event_id = #{eventId}
+    AND is_delete = 0
+    LIMIT 1
+  </select>
+
+</mapper>

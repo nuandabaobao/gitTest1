@@ -1,0 +1,65 @@
+spring:
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://60.29.46.254:3306/portal?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+      username: root
+      password: portal_root123
+      maximumPoolSize: 200
+      maxIdle: 30
+      minIdle: 5
+      maxWait: 5000
+      maxActive: 200
+      initalSize: 5
+
+      filters: stat
+      # connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  session:
+    store-type: none
+#  redis:
+#    host: 112.124.100.131
+#    password: taoshijianapp
+#    port: 26379
+#    jedis:
+#      pool:
+#        maxActive: 100
+#        maxIdle: 8
+
+http:
+    multipart:
+      maxFileSize: 104857600
+      maxRequestSize: 104857600
+
+mybatis:
+  mapperLocations: classpath:mybatis/**/*Repository.xml
+  typeAliasesPackage: com.tbjj.portal.repository.**.entity
+  configLocation: classpath:mybatis-config.xml
+
+logging:
+  level:
+    org:
+      mybatis:
+        SQL: info
+      springframework: info
+
+
+tbjj:
+  ossurl: "F:\\img\\"
+
+
+tbjjImg:
+  imgUrl: "E:\\安装包\\apache-tomcat-7.0.84\\webapps\\img\\"
+
+#久其的ip地址及端口号
+finance:
+  wsdlurl: "http://60.29.46.254:8888/dna_ws/ImpBillWebService?wsdl"
+
+#明源结果接口及端口号
+#result:
+#  resultUrl: "http://127.0.0.1:8086/approveResult"
+
+#明源实付款信息接口及端口号
+#payMoney:
+#  payMoneyUrl: "http://127.0.0.1:8086/payMoney"
+
+#http://192.168.0.125:8084/upload.action?action=uploadfile

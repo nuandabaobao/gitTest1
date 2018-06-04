@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.EventMessageRepository">
+
+  <!--根据用户名查询事件未完成所有消息-->
+  <select id="getAllMsg" parameterType="String" resultType="com.tbjj.portal.repository.api.entity.EventMessage">
+      SELECT
+          m.mess_id AS messId,
+          m.mess_title AS messTitle,
+          m.mess_url AS messUrl,
+          m.mess_date AS messDate,
+          m.user_name AS userName,
+          m.mess_status AS messStatus,
+          m.event_stream_id AS eventStreamId
+      FROM
+          portal_event_message m,
+          portal_event_stream s,
+          portal_event e
+      WHERE
+          m.user_name = #{userName}
+      AND s.id = m.event_stream_id
+      AND s.event_id = e.id
+      AND e.event_status = 1
+      AND m.is_delete = 0
+  </select>
+
+
+    <!--根据用户名查询所有未读消息-->
+    <select id="getAllNoReadMsg" parameterType="String" resultType="com.tbjj.portal.repository.api.entity.EventMessage">
+      SELECT
+          m.mess_id AS messId,
+          m.mess_title AS messTitle,
+          m.mess_url AS messUrl,
+          m.mess_date AS messDate,
+          m.user_name AS userName,
+          m.mess_status AS messStatus,
+          m.event_stream_id AS eventStreamId
+      FROM
+          portal_event_message m,
+          portal_event_stream s,
+          portal_event e
+      WHERE
+          m.user_name = #{userName}
+      AND s.id = m.event_stream_id
+      AND s.event_id = e.id
+      AND e.event_status = 1
+      AND m.is_delete = 0
+      AND m.mess_status=0
+    </select>
+</mapper>

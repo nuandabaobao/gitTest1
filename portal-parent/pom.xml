@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tbjj.portal</groupId>
+    <artifactId>portal-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId} v${project.version}</name>
+    <description>parent依赖</description>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.3.RELEASE</version>
+    </parent>
+
+    <properties>
+        <guava.version>19.0</guava.version>
+        <projectreactor.version>2.0.7.RELEASE</projectreactor.version>
+        <apache-commons.version>2.5</apache-commons.version>
+        <mysql-connector.verison>5.1.29</mysql-connector.verison>
+        <mybatis-spring-boot-starter.version>1.1.1</mybatis-spring-boot-starter.version>
+        <embedded-redis.version>0.6</embedded-redis.version>
+        <lombok.version>1.16.6</lombok.version>
+        <jjwt.version>0.6.0</jjwt.version>
+        <apache.commons.codec.version>1.10</apache.commons.codec.version>
+        <apache.commons.beanutils.version>1.9.3</apache.commons.beanutils.version>
+        <assertj.version>1.5.0</assertj.version>
+        <azure.version>4.0.0</azure.version>
+        <mybatis.pagehelper.version>5.0.0</mybatis.pagehelper.version>
+        <joda.time.version>2.9.7</joda.time.version>
+        <spring.session.version>1.3.0.RELEASE</spring.session.version>
+        <spring.data.redis.version>1.5.1.RELEASE</spring.data.redis.version>
+        <apache.poi.version>3.13</apache.poi.version>
+        <belerweb.version>2.5.1</belerweb.version>
+        <activemq-pool.version>5.14.5</activemq-pool.version>
+        <javax.inject.version>1</javax.inject.version>
+        <powermock.version>1.6.6</powermock.version>
+        <gson.version>2.8.0</gson.version>
+        <druid.version>1.0.31</druid.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-core</artifactId>
+                <version>${projectreactor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-net</artifactId>
+                <version>${projectreactor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor.spring</groupId>
+                <artifactId>reactor-spring-context</artifactId>
+                <version>${projectreactor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${apache-commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${apache-commons.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>com.github.kstyrc</groupId>-->
+                <!--<artifactId>embedded-redis</artifactId>-->
+                <!--<version>${embedded-redis.version}</version>-->
+            <!--</dependency>-->
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${apache.commons.codec.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${apache.commons.beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
+                <version>${activemq-pool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+            </dependency>
+            <!-- azure storage -->
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-storage</artifactId>
+                <version>${azure.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${mybatis.pagehelper.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda.time.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session</artifactId>
+                <version>${spring.session.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
+                <!--<version>${spring.data.redis.version}</version>-->
+            <!--</dependency>-->
+            <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${apache.poi.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${apache.poi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.31</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>1.8.5</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.8.3</version>
+            </dependency>
+
+            <!--CXF配置-->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>3.1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-transports-http</artifactId>
+                <version>3.1.6</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

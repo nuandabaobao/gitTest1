@@ -1,0 +1,18 @@
+spring:
+  profiles:
+      active: dat
+  http:
+      multipart:
+        maxFileSize: 100Mb
+        maxRequestSize: 100Mb
+
+server:
+  contextPath: /
+  port: 18085
+
+batch:
+  runkey: "03"
+
+
+
+

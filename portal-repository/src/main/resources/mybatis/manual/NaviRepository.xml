@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.NaviRepository">
+
+  <select id="getNaviNoEmpList" parameterType="Integer" resultType="com.tbjj.portal.repository.api.entity.EmployeeOnNavi">
+  SELECT
+	n.id AS naviId,
+	n.`name` AS naviName,
+	n.url AS naviUrl
+  FROM
+      portal_navi n
+  WHERE
+      n.is_delete = 0
+  AND n.id NOT IN (
+      SELECT
+          z.navi_id
+      FROM
+          portal_navi_emp z
+      WHERE
+          z.employee_id = #{employeeId}
+      AND z.is_delete = 0
+     );
+  </select>
+
+</mapper>

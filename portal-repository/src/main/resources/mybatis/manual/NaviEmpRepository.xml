@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.NaviEmpRepository">
+
+  <!--根据用户id查询已关联标签-->
+  <select id="getIndexNaviList" parameterType="Integer" resultType="com.tbjj.portal.repository.api.entity.EmployeeOnNavi">
+    SELECT
+    z.id as "naviEmpId",
+    z.employee_id as "empId",
+    z.navi_id as "naviId",
+    n.`name` as "naviName",
+    n.url as "naviUrl"
+    FROM
+    portal_navi_emp z
+    LEFT JOIN portal_navi n ON z.navi_id = n.id
+    WHERE
+    z.employee_id = #{employeeId}
+    AND z.is_delete = 0;
+  </select>
+
+</mapper>

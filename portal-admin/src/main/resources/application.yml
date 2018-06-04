@@ -1,0 +1,11 @@
+spring:
+  profiles:
+        active: dat
+
+# config context path to "/" by setting an empty string
+server:
+  contextPath: /
+  port: 18084
+
+batch:
+  runkey: ""

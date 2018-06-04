@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tbjj.portal.repository.api.PanelRepository">
+
+  <!--根据面板id查询未关联的面板-->
+  <select id="getPanelNoEmpList" parameterType="Integer" resultType="com.tbjj.portal.repository.api.entity.EmployeeOnPanel">
+    SELECT
+        p.id as panelId,
+        p.`name` as panelName,
+        p.yaxis as panelYaxis,
+        p.inco_url as panelIncoUrl,
+        p.panel_type AS panelType
+    FROM
+        portal_panel p
+    WHERE
+        p.is_delete = 0
+    AND p.id NOT IN (
+        SELECT
+            z.panel_id
+        FROM
+            portal_panel_emp z
+        WHERE
+            z.employee_id = #{empId}
+        AND z.is_delete = 0
+    );
+  </select>
+
+</mapper>
