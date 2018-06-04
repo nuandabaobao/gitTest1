@@ -1,0 +1,1 @@
+{"comment":"í—Ä¿»ùµAÅäÖÃ\n # Redis cust config\n #","fields":{},"methods":{"corsFilter": { "comment":"", "parameters":{}},"cookieSerializer": { "comment":"", "parameters":{}},"schedulerFactoryBean": { "comment":"", "parameters":{}}}}

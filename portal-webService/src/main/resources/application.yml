@@ -1,0 +1,23 @@
+spring:
+  profiles:
+      active: dat
+  http:
+      multipart:
+        maxFileSize: 100Mb
+        maxRequestSize: 100Mb
+
+#启用shutdown
+#禁用密码验证
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false
+
+# config context path to "/" by setting an empty string
+server:
+  contextPath: /
+  port: 18087
+
+batch:
+  runkey: "03"
+
